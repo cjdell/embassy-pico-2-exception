@@ -1,0 +1,82 @@
+[package]
+edition = "2024"
+name = "embassy-pico-2-exception"
+version = "0.1.0"
+authors = ["Chris Dell <cjdell@gmail.com>"]
+resolver = "2"
+
+[[bin]]
+name = "pico-firmware"
+path = "src/bin/main.rs"
+test = false
+bench = false
+
+[features]
+wifi = []
+wired = []
+
+[dependencies]
+defmt = "1.0.1"
+defmt-rtt = "1.0.0"
+panic-probe = { version = "1.0.0", features = ["print-defmt"] }
+static_cell = "2.1.1"
+rand_core = "0.6.4"
+heapless = "0.8.0"
+embedded-alloc = { version = "*" }
+
+embedded-hal = "1.0.0"
+embedded-hal-async = "1.0.0"
+embedded-io = "0.6.1"
+embedded-io-async = "0.6.1"
+embedded-storage = "0.3.1"
+embedded-hal-bus = { version = "0.3.0", features = ["async"] }
+
+cortex-m = { version = "0.7.7", features = ["inline-asm"] }
+cortex-m-rt = "0.7.5"
+critical-section = "1.2"
+portable-atomic = { version = "1.13.1", features = ["critical-section"] }
+
+cyw43 = { version = "0.7.0", features = ["defmt"] }
+cyw43-pio = { version = "0.10.0", features = ["defmt"] }
+embassy-rp = { version = "0.10.0", features = [
+    "defmt",
+    "unstable-pac",
+    "time-driver",
+    "critical-section-impl",
+    "rp235xa",
+    "binary-info",
+] }
+embassy-net = { version = "0.9.1", features = [
+    "defmt",
+    "icmp",
+    "tcp",
+    "udp",
+    "raw",
+    "dhcpv4",
+    "medium-ethernet",
+    "dns",
+] }
+embassy-executor = { version = "0.10.0", features = [
+    "platform-cortex-m",
+    "executor-thread",
+    "defmt",
+    "executor-interrupt",
+] }
+embassy-sync = { version = "0.8.0", features = ["defmt"] }
+embassy-time = { version = "0.5.1", features = [
+    "defmt",
+    "defmt-timestamp-uptime",
+] }
+embassy-embedded-hal = "0.6.0"
+embassy-futures = "0.1.2"
+embassy-net-wiznet = { version = "0.3.0", features = ["defmt"] }
+
+[profile.release]
+debug = 2
+lto = true
+opt-level = 'z'
+
+[profile.dev]
+debug = 2
+# lto = true
+# opt-level = "z"
