@@ -41,3 +41,7 @@ Core 1
 
 Error: Exception
 ```
+
+Needs `probe-rs` installing from: https://github.com/probe-rs/probe-rs/pull/3913
+
+   cargo install --git https://github.com/akiles-dev/probe-rs.git --branch thumbv8m-exception-unwind probe-rs-tools
